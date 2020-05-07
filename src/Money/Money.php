@@ -27,6 +27,11 @@ final class Money
         return new self($money);
     }
 
+    public function getMoneyValue($money)
+    {
+        return $money;
+    }
+
 }
 
 

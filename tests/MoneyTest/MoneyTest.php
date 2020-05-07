@@ -25,6 +25,14 @@ final class MoneyTest extends TestCase
         Money::fromMoney(-5);
     }
 
+    public function testMoneySize(): void
+    {
+        $money1 = Money::fromMoney(5);
+        $money2 = Money::fromMoney(6);
+
+        $this->assertTrue($money1<$money2);
+    }
+
 }
 
 
