@@ -18,6 +18,13 @@ final class MoneyTest extends TestCase
         Money::fromMoney("ciao");
     }
 
+    public function testNegativeNumber(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Money::fromMoney(-5);
+    }
+
 }
 
 

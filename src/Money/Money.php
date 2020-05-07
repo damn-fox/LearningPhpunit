@@ -13,8 +13,12 @@ final class Money
 
     private function ensureIsValidNumber( $money): void
     {
-        if (!is_int($money)) {
+        if (!is_int($money)){
             throw new InvalidArgumentException(sprintf('"%s" is not a valid money object',$money));
+        }
+        
+        if($money < 0){
+            throw new InvalidArgumentException(sprintf('"%s" cannot be negative',$money));
         }
     }
 

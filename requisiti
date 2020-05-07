@@ -1,0 +1,7 @@
+Un oggetto money può essere creato da un numero intero
+Un oggetto money non può essere creato da un numero decimale
+Un oggetto money non può essere creato da una stringa
+Un oggetto money sa se è più grande o più piccolo di un altro Money
+Posso ottenere un oggetto money sommandone due
+Posso ottenere un oggetto money sottraendone due
+Non è possibile ottenere un oggetto Money negativo
