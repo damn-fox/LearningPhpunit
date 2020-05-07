@@ -27,9 +27,9 @@ final class Money
         return new self($money);
     }
 
-    public function getMoneyValue($money)
+    public function getMoneyValue()
     {
-        return $money;
+        return $this->money;
     }
 
 }
