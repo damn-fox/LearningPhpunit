@@ -11,7 +11,7 @@ final class MoneyTest extends TestCase
     {
         $this->assertInstanceOf(
             Money::class,
-            Money::fromMoney(5)
+            new Money(5)
         );
     }
 
@@ -19,20 +19,20 @@ final class MoneyTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Money::fromMoney("ciao");
+        new Money("ciao");
     }
 
     public function testNegativeNumber(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Money::fromMoney(-5);
+        new Money(-5);
     }
 
     public function testMoneySize(): void
     {
-        $money1 = Money::fromMoney(8);
-        $money2 = Money::fromMoney(9);
+        $money1 = new Money(8);
+        $money2 = new Money(9);
 
         $this->assertTrue($money1<$money2);
     }
@@ -40,15 +40,15 @@ final class MoneyTest extends TestCase
     
     public function testCreateValidInstanceByAddingObjects(): void
     {
-        $this->assertEquals(Money::fromMoney(11),Money::addingObjects(5,6));
+        $var = new Money(5);
+        $this->assertEquals(new Money(11),$var->addingObjects(new Money(6)));
     }
 
     public function testCreateValidInstanceBySubtractingObjects(): void
     {
-        $this->assertEquals(Money::fromMoney(2),Money::subtractingObjects(4,2));
+        $var = new Money(4);
+        $this->assertEquals(new Money(2),$var->subtractingObjects(new Money(2)));
     }
-
-
 }
 
 
