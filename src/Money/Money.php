@@ -30,12 +30,12 @@ final class Money
         return $this->money;
     }
 
-    public function addingObjects(Money $money1)
+    public function add(Money $money1)
     {
         return new Money($this->money + $money1->money);
     }
 
-    public function subtractingObjects(Money $money1)
+    public function sub(Money $money1)
     {
         return new Money($this->money - $money1->money);
     }
