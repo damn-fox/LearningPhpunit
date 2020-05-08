@@ -37,27 +37,17 @@ final class MoneyTest extends TestCase
         $this->assertTrue($money1<$money2);
     }
 
+    
     public function testCreateValidInstanceByAddingObjects(): void
     {
-        $money1 = Money::fromMoney(5);
-        $money2 = Money::fromMoney(6);
-
-        $this->assertInstanceOf(
-            Money::class,
-            Money::fromMoney($money1->getMoneyValue() + $money2->getMoneyValue())
-        );
+        $this->assertEquals(Money::fromMoney(11),Money::addingObjects(5,6));
     }
 
     public function testCreateValidInstanceBySubtractingObjects(): void
     {
-        $money1 = Money::fromMoney(7);
-        $money2 = Money::fromMoney(6);
-
-        $this->assertInstanceOf(
-            Money::class,
-            Money::fromMoney($money1->getMoneyValue() - $money2->getMoneyValue())
-        );
+        $this->assertEquals(Money::fromMoney(2),Money::subtractingObjects(4,2));
     }
+
 
 }
 

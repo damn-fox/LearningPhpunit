@@ -14,7 +14,7 @@ final class Money
         $this->money = $money;
     }
 
-    private function ensureIsValidNumber( $money): void
+    private function ensureIsValidNumber($money): void
     {
         if (!is_int($money)){
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid money object',$money));
@@ -30,9 +30,23 @@ final class Money
         return new self($money);
     }
 
-    public function getMoneyValue()
+    public function getValue()
     {
         return $this->money;
+    }
+
+    public static function addingObjects($money1,$money2)
+    {
+        $var1 =Money::fromMoney($money1)->money;
+        $var2 =Money::fromMoney($money2)->money;
+        return Money::fromMoney($var1 + $var2);
+    }
+
+    public static function subtractingObjects($money1,$money2)
+    {
+        $var1 =Money::fromMoney($money1)->money;
+        $var2 =Money::fromMoney($money2)->money;
+        return Money::fromMoney($var1 - $var2);
     }
 
 }
