@@ -7,7 +7,7 @@ final class Money
 
     private $money;
 
-    private function __construct( $money)
+    public function __construct( $money)
     {
         $this->ensureIsValidNumber($money);
 
@@ -25,28 +25,19 @@ final class Money
         }
     }
 
-    public static function fromMoney($money): self
-    {
-        return new self($money);
-    }
-
     public function getValue()
     {
         return $this->money;
     }
 
-    public static function addingObjects($money1,$money2)
+    public function add(Money $money1)
     {
-        $var1 =Money::fromMoney($money1)->money;
-        $var2 =Money::fromMoney($money2)->money;
-        return Money::fromMoney($var1 + $var2);
+        return new Money($this->money + $money1->money);
     }
 
-    public static function subtractingObjects($money1,$money2)
+    public function sub(Money $money1)
     {
-        $var1 =Money::fromMoney($money1)->money;
-        $var2 =Money::fromMoney($money2)->money;
-        return Money::fromMoney($var1 - $var2);
+        return new Money($this->money - $money1->money);
     }
 
 }
