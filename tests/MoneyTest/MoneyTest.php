@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Acme\Money;
+require "vendor/autoload.php";
+
+use Acme\Money;
 
 use PHPUnit\Framework\TestCase;
 
