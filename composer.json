@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\": "src/"
+            "Acme\\": ["Basket/src/","Money/src/","Kata/src/","Bowling/src"]
         }
     },
     "require-dev": {
