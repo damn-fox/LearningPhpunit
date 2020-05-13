@@ -7,7 +7,7 @@ final class Logger
 
     private $text = array();
 
-    public function log( $userString)
+    public function Log(string $userString): void
     {
         if( $userString !== '')
         {
@@ -15,7 +15,7 @@ final class Logger
         }
     }
 
-    public function getValue()
+    public function GetValue() : array
     {
         return $this->text;
     }
