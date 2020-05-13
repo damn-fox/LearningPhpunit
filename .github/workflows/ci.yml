@@ -12,4 +12,4 @@ jobs:
       with:
         config: phpunit.xml
     - name: Run test suite
-      run: vendor/bin/phpunit --testsuite allTests
+      run: ./vendor/bin/phpunit --testsuite allTests
