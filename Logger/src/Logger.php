@@ -13,15 +13,6 @@ final class Logger
 
     public function __construct()
     {
-        $user = "damnfox";
-        $pass = "damnfox300992";
-        try {
-            $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
-        } catch (PDOException $e) {
-            print "Error!: " . $e->getMessage() . "<br/>";
-            die();
-        }
-
         if (!file_exists($this->pathFile)) {
             $myfile = fopen($this->pathFile, "w") or die("Unable to open file!");
             fclose($myfile);
@@ -37,6 +28,17 @@ final class Logger
             $current = file_get_contents($this->pathFile);
             $current .= "$userString\n";
             file_put_contents($this->pathFile, $current);
+
+                $user = "damnfox";
+                $pass = "damnfox300992";
+                try {
+                    $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
+                    $sql = "INSERT INTO log (textlog) VALUES (?)";
+                    $connection->prepare($sql)->execute([$userString]);
+                } catch (PDOException $e) {
+                    print "Error!: " . $e->getMessage() . "<br/>";
+                    die();
+                }
         }
     }
 
