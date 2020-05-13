@@ -55,6 +55,23 @@ final class LoggerTest extends TestCase
         $this->assertEquals("Sono una stringa",$this->logger->getValue()[2]);
     }
 
+    /**
+     * @test
+     */
+    public function EnterAllEmptyStrings()
+    {
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->logger->log("");
+        $this->assertEquals(0,count($this->logger->getValue()));
+    }
+
 }
 
 
