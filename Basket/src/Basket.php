@@ -7,16 +7,6 @@ final class Basket {
     private $scoreA=0;
     private $scoreB=0;
 
-    /*
-    void scoreTeamA1()
-    void scoreTeamA2()
-    void scoreTeamA3()
-    void scoreTeamB1()
-    void scoreTeamB2()
-    void scoreTeamB3()
-    String getScore()
-    */
-
     public function scoreTeamA1() :void
     {
         $this->scoreA+=1;
