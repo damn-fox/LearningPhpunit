@@ -53,9 +53,4 @@ final class BowlingTest extends TestCase
             $this->g->roll($pins);
         }
     }
-
-    public function rollStrike()
-    {
-        $this->g->roll(10);
-    }
 }
