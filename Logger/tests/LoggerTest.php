@@ -34,6 +34,7 @@ final class LoggerTest extends TestCase
      */
     public function ArrayLenght()
     {
+        $this->logger->ChooseMethod("file");
         $this->logger->log("ciao");
         $this->logger->log("");
         $this->logger->log("ciao");
@@ -48,6 +49,7 @@ final class LoggerTest extends TestCase
      */
     public function ArrayHoldsTheValue()
     {
+        $this->logger->ChooseMethod("file");
         $this->logger->log("ciao");
         $this->logger->log("ciao");
         $this->logger->log("");
@@ -61,6 +63,7 @@ final class LoggerTest extends TestCase
      */
     public function EnterAllEmptyStrings()
     {
+        $this->logger->ChooseMethod("file");
         $this->logger->log("");
         $this->logger->log("");
         $this->logger->log("");
@@ -86,6 +89,7 @@ final class LoggerTest extends TestCase
      */
     public function StringMatchesFile()
     {
+        $this->logger->ChooseMethod("file");
         $text="ciao\n";
         $text.="ciao\n";
         $text.="ciao\n";
@@ -106,8 +110,14 @@ final class LoggerTest extends TestCase
      */
     public function CheckDatabaseConnection()
     {
-        
+            $this->logger->ChooseMethod("database");
+            $this->logger->log("ciao");
+            $this->logger->log("ciao");
+            $this->logger->log("");
+            $this->logger->log("Sono una stringa");
+            $this->logger->log("");
         try {
+
             $user = "damnfox";
             $pass = "damnfox300992";
             $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
@@ -116,7 +126,7 @@ final class LoggerTest extends TestCase
             $statement->execute();
             $totale = $statement->rowCount();
 
-            $this->assertEquals(6,$totale);
+            $this->assertEquals(3,$totale);
             
             $statement2 = $connection->prepare("TRUNCATE TABLE log");
             $statement2->execute();

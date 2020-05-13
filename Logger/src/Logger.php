@@ -9,6 +9,7 @@ final class Logger
 {
 
     private $text = array();
+    private $method ;
     private $pathFile = "/var/www/html/LearningPhpunit/log.txt";
 
     public function __construct()
@@ -19,16 +20,24 @@ final class Logger
         }
     }
 
+    public function ChooseMethod($method){
+        $this->method= $method;
+    }
+
     public function Log(string $userString): void
     {
         if( $userString !== '')
         {
             $this->text[] = $userString;
+            if($this->method =="file")
+            {
+                $current = file_get_contents($this->pathFile);
+                $current .= "$userString\n";
+                file_put_contents($this->pathFile, $current);
+            }
 
-            $current = file_get_contents($this->pathFile);
-            $current .= "$userString\n";
-            file_put_contents($this->pathFile, $current);
-
+            if($this->method =="database")
+            {
                 $user = "damnfox";
                 $pass = "damnfox300992";
                 try {
@@ -39,6 +48,7 @@ final class Logger
                     print "Error!: " . $e->getMessage() . "<br/>";
                     die();
                 }
+            }
         }
     }
 
@@ -47,6 +57,3 @@ final class Logger
         return $this->text;
     }
 }
-
-
-?>
