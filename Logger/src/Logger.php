@@ -2,6 +2,9 @@
 
 namespace Acme;
 
+use \PDO;
+use \PDOException;
+
 final class Logger
 {
 
@@ -10,11 +13,19 @@ final class Logger
 
     public function __construct()
     {
+        $user = "damnfox";
+        $pass = "damnfox300992";
+        try {
+            $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+
         if (!file_exists($this->pathFile)) {
             $myfile = fopen($this->pathFile, "w") or die("Unable to open file!");
             fclose($myfile);
         }
-
     }
 
     public function Log(string $userString): void
@@ -22,7 +33,7 @@ final class Logger
         if( $userString !== '')
         {
             $this->text[] = $userString;
-            
+
             $current = file_get_contents($this->pathFile);
             $current .= "$userString\n";
             file_put_contents($this->pathFile, $current);

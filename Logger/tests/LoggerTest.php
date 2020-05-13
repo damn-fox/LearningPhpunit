@@ -100,6 +100,26 @@ final class LoggerTest extends TestCase
             fclose($fp);
         }
     }
+    
+    /**
+     * @test
+     */
+    public function CheckDatabaseConnection()
+    {
+        $user = "damnfox";
+        $pass = "damnfox30992";
+        $trueConn =false;
+        try {
+            $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
+            if($connection){
+                $trueConn = true;
+            }
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        $this->assertEquals(true,$trueConn);
+    }
 
 }
 
