@@ -49,5 +49,4 @@ final class Bowling
     {
         return $this->rolls[$game] + $this->rolls[$game + 1];
     }
-
 }
