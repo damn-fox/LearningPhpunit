@@ -11,6 +11,7 @@ final class LoggerTest extends TestCase
 {
 
     private $logger;
+    private $pathFile = "/var/www/html/LearningPhpunit/log.txt";
 
     public function setUp(): void
     {
@@ -70,6 +71,34 @@ final class LoggerTest extends TestCase
         $this->logger->log("");
         $this->logger->log("");
         $this->assertEquals(0,count($this->logger->getValue()));
+    }
+
+    /**
+     * @test
+     */
+    public function CheckFileExists()
+    {
+        $this->assertFileExists($this->pathFile);
+    }
+
+    /**
+     * @test
+     */
+    public function StringMatchesFile()
+    {
+        $text="ciao\n";
+        $text.="ciao\n";
+        $text.="ciao\n";
+        $text.="ciao\n";
+        $text.="ciao\n";
+        $text.="Sono una stringa\n";
+
+        $this->assertStringEqualsFile($this->pathFile, $text);
+
+        if (file_exists($this->pathFile)) { 
+            $fp = fopen($this->pathFile, 'w');
+            fclose($fp);
+        }
     }
 
 }
