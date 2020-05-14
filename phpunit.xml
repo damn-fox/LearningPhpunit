@@ -29,6 +29,7 @@
             <file>Kata/tests/KataConvertTest.php</file>
             <file>Basket/tests/BasketTest.php</file>
             <file>Bowling/tests/BowlingTest.php</file>
+            <file>Logger/tests/LoggerTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>

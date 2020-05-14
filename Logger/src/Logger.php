@@ -1,13 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Acme;
 
 use \PDO;
 use \PDOException;
 
-final class Logger
-{
-
+/*
     private $text = array();
     private $method ;
     private $pathFile = "/var/www/html/LearningPhpunit/log.txt";
@@ -56,4 +56,71 @@ final class Logger
     {
         return $this->text;
     }
+    */
+
+interface LoggerAdapter
+{
+    public function log(string $userString): void;
+
+    public function get(): array;
+}// end interface
+
+class FileAdapter implements LoggerAdapter
+{
+    private $filePath;
+    private $message = [];
+    public function __construct(string $filePath)
+    {
+        $this->filePath = $filePath;
+    }
+
+    public function log(string $userString): void
+    {
+        $this->message[] = $userString;
+        $fp = fopen($this->filePath, 'w');
+        file_put_contents($this->pathFile, $userString);
+        fclose($fp);
+    }
+
+    public function get(): array
+    {
+        return $this->message;
+    }
+}// end class fileadapter implements interface
+
+class DummyAdapter implements LoggerAdapter
+{
+    private $message = [];
+
+    public function log(string $userString): void
+    {
+        $this->message[] = $userString;
+    }
+
+    public function get(): array
+    {
+        return $this->message;
+    }
 }
+
+final class Logger
+{
+    public function __construct(LoggerAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
+    public function log(string $userString): void
+    {
+        if ($userString === '') {
+            return;
+        }
+
+        $this->adapter->log($userString);
+    }
+
+    public function get(): array
+    {
+        return $this->adapter->get();
+    }
+} // end class logger 
