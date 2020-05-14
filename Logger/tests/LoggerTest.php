@@ -4,6 +4,7 @@ require "vendor/autoload.php";
 
 use Acme\DummyAdapter;
 use Acme\FileAdapter;
+use Acme\DBAdapter;
 use Acme\Logger;
 
 use PHPUnit\Framework\TestCase;
@@ -14,14 +15,18 @@ final class LoggerTest extends TestCase
 
     private $loggerDummy;
     private $loggerFile;
+    private $loggerDb;
     private $filePath = '/var/www/html/LearningPhpunit/log.txt';
+    private $dbPath = '/var/www/html/LearningPhpunit/configDB.db';
 
     public function setUp(): void
     {
+        unlink($this->filePath);
+        unlink($this->dbPath);
+
         $this->loggerDummy = new Logger(new DummyAdapter());
         $this->loggerFile = new Logger(new FileAdapter($this->filePath));
-        
-        unlink($this->filePath);
+        $this->loggerDb = new Logger(new DBAdapter($this->dbPath));
     }
 
     /**
@@ -104,8 +109,22 @@ final class LoggerTest extends TestCase
         $this->loggerFile->log("");
         $this->loggerFile->log("bravo");
         $this->assertEquals(3,count($this->loggerFile->get()));
-        unlink($this->filePath);
     }
+
+    /**
+     * @test
+     */
+    public function DbLenght()
+    {
+        $this->loggerDb->log("ciao");
+        $this->loggerDb->log("");
+        $this->loggerDb->log("ciccio");
+        $this->loggerDb->log("");
+        $this->loggerDb->log("");
+        $this->loggerDb->log("bravo");
+        $this->assertEquals(3,count($this->loggerDb->get()));
+    }
+
     
 }
 

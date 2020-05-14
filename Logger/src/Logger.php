@@ -63,18 +63,57 @@ interface LoggerAdapter
     public function log(string $userString): void;
 
     public function get(): array;
-}// end interface
+    
+} // end interface
+
+class DBAdapter implements LoggerAdapter
+{
+    private $DbPath;
+     /**
+     * PDO instance
+     * @var type 
+     */
+    private $pdo;
+
+    public function __construct(string $DbPath)
+    {
+        $this->filePath = $DbPath;
+        if ($this->pdo == null) {
+            $this->pdo = new \PDO("sqlite:".$this->DbPath);
+        }
+        $tables = 'CREATE TABLE IF NOT EXISTS log (id   INTEGER PRIMARY KEY AUTOINCREMENT,logtext TEXT NOT NULL)';
+        
+            $this->pdo->exec($tables);
+       
+    }
+
+    public function log(string $userString): void
+    {
+        $insertQuery = "INSERT INTO log (logtext) VALUES ('".$userString."')";
+        $this->pdo->exec($insertQuery);
+    }
+
+    public function get(): array
+    {
+        $result = $this->pdo->query('SELECT * FROM log'); // buffered result set
+        $messages = [];
+        while ($message = $result->fetchObject()) {
+            $messages[] = $message;
+        }
+
+        return $messages;
+    }
+} // end class DBadapter implements interface
 
 class FileAdapter implements LoggerAdapter
 {
     private $filePath;
-    private $message = [];
+    
 
     public function __construct(string $filePath)
     {
         $this->filePath = $filePath;
-        if(!file_exists($this->filePath))
-        {
+        if (!file_exists($this->filePath)) {
             $fp = fopen($this->filePath, 'w');
             fclose($fp);
         }
@@ -82,15 +121,21 @@ class FileAdapter implements LoggerAdapter
 
     public function log(string $userString): void
     {
-        $this->message[] = $userString;
-        file_put_contents($this->filePath, $userString.PHP_EOL , FILE_APPEND | LOCK_EX);
+        file_put_contents($this->filePath, $userString . PHP_EOL, FILE_APPEND | LOCK_EX);
     }
 
     public function get(): array
     {
-        return $this->message;
+        $message = [];
+
+        $fn = file($this->filePath);
+        foreach ($fn as $line) 
+        {
+            $message[] =$line;
+        }
+        return $message;
     }
-}// end class fileadapter implements interface
+} // end class fileadapter implements interface
 
 class DummyAdapter implements LoggerAdapter
 {
