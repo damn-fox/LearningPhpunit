@@ -3,6 +3,7 @@
 require "vendor/autoload.php";
 
 use Acme\DummyAdapter;
+use Acme\FileAdapter;
 use Acme\Logger;
 
 use PHPUnit\Framework\TestCase;
@@ -11,11 +12,16 @@ use PHPUnit\Framework\TestCase;
 final class LoggerTest extends TestCase
 {
 
-    private $logger;
+    private $loggerDummy;
+    private $loggerFile;
+    private $filePath = '/var/www/html/LearningPhpunit/log.txt';
 
     public function setUp(): void
     {
-        $this->logger = new Logger(new DummyAdapter());
+        $this->loggerDummy = new Logger(new DummyAdapter());
+        $this->loggerFile = new Logger(new FileAdapter($this->filePath));
+        
+        unlink($this->filePath);
     }
 
     /**
@@ -34,13 +40,13 @@ final class LoggerTest extends TestCase
      */
     public function arrayLenght()
     {
-        $this->logger->log("ciao");
-        $this->logger->log("");
-        $this->logger->log("ciao");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("ciao");
-        $this->assertEquals(3,count($this->logger->get()));
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("ciao");
+        $this->assertEquals(3,count($this->loggerDummy->get()));
     }
 
     /**
@@ -48,12 +54,12 @@ final class LoggerTest extends TestCase
      */
     public function arrayHoldsTheValue()
     {
-        $this->logger->log("ciao");
-        $this->logger->log("ciao");
-        $this->logger->log("");
-        $this->logger->log("Sono una stringa");
-        $this->logger->log("");
-        $this->assertEquals("Sono una stringa",$this->logger->get()[2]);
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("Sono una stringa");
+        $this->loggerDummy->log("");
+        $this->assertEquals("Sono una stringa",$this->loggerDummy->get()[2]);
     }
 
     /**
@@ -61,12 +67,12 @@ final class LoggerTest extends TestCase
      */
     public function arrayDoesntHoldsTheValue()
     {
-        $this->logger->log("ciao");
-        $this->logger->log("ciao");
-        $this->logger->log("");
-        $this->logger->log("Sono una stringa");
-        $this->logger->log("");
-        $this->assertNotEquals("Sono unastringa",$this->logger->get()[2]);
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("ciao");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("Sono una stringa");
+        $this->loggerDummy->log("");
+        $this->assertNotEquals("Sono unastringa",$this->loggerDummy->get()[2]);
     }
 
     /**
@@ -74,16 +80,31 @@ final class LoggerTest extends TestCase
      */
     public function enterAllEmptyStrings()
     {
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->logger->log("");
-        $this->assertEquals(0,count($this->logger->get()));
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->loggerDummy->log("");
+        $this->assertEquals(0,count($this->loggerDummy->get()));
+    }
+
+    /**
+     * @test
+     */
+    public function fileLenght()
+    {
+        $this->loggerFile->log("ciao");
+        $this->loggerFile->log("");
+        $this->loggerFile->log("ciccio");
+        $this->loggerFile->log("");
+        $this->loggerFile->log("");
+        $this->loggerFile->log("bravo");
+        $this->assertEquals(3,count($this->loggerFile->get()));
+        unlink($this->filePath);
     }
     
 }

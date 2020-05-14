@@ -69,17 +69,21 @@ class FileAdapter implements LoggerAdapter
 {
     private $filePath;
     private $message = [];
+
     public function __construct(string $filePath)
     {
         $this->filePath = $filePath;
+        if(!file_exists($this->filePath))
+        {
+            $fp = fopen($this->filePath, 'w');
+            fclose($fp);
+        }
     }
 
     public function log(string $userString): void
     {
         $this->message[] = $userString;
-        $fp = fopen($this->filePath, 'w');
-        file_put_contents($this->pathFile, $userString);
-        fclose($fp);
+        file_put_contents($this->filePath, $userString.PHP_EOL , FILE_APPEND | LOCK_EX);
     }
 
     public function get(): array
