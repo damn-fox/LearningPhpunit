@@ -4,4 +4,9 @@ php:
 before_script:
   - composer install
 
-script: ./vendor/bin/phpunit --testsuite allTests
+script: 
+  - ./vendor/bin/phpunit --testsuite allTests
+  - ./vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --diff --dry-run
+cache:
+  directories:
+    - $HOME/.php-cs-fixer

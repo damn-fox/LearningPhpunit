@@ -1,3 +1,4 @@
 composer.lock
 requisiti
 /vendor/*
+.php_cs.cache
