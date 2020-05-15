@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f47d2b3d42eff16cf04ca264711e79d",
+    "content-hash": "8eb208588af86eaf9638a7ba21de2696",
     "packages": [
         {
             "name": "composer/semver",
@@ -440,6 +440,52 @@
                 "diff"
             ],
             "time": "2018-02-15T16:58:55+00:00"
+        },
+        {
+            "name": "prooph/php-cs-fixer-config",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/php-cs-fixer-config.git",
+                "reference": "fd92e9e55988f2244f578b3dd2719560edf04d40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/php-cs-fixer-config/zipball/fd92e9e55988f2244f578b3dd2719560edf04d40",
+                "reference": "fd92e9e55988f2244f578b3dd2719560edf04d40",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\CS\\Config\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.codeliner.ws/"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "PHP CS Fixer config for prooph components",
+            "time": "2020-04-17T01:23:00+00:00"
         },
         {
             "name": "psr/container",
