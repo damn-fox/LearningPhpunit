@@ -21,14 +21,26 @@
          <testsuite name="bowling">
             <directory>Bowling/tests</directory>
         </testsuite>
-        <testsuite name="money">
+        <testsuite name="logger">
             <directory>Logger/tests</directory>
+        </testsuite>
+         <testsuite name="DBlogger">
+            <directory>Logger/tests</directory>
+        </testsuite>
+         <testsuite name="filelogger">
+            <directory>Logger/tests</directory>
+        </testsuite>
+        <testsuite name="wardrobe">
+            <directory>Wardrobe/tests</directory>
         </testsuite>
          <testsuite name="allTests">
             <file>Money/tests/MoneyTest.php</file>
             <file>Kata/tests/KataConvertTest.php</file>
             <file>Basket/tests/BasketTest.php</file>
             <file>Bowling/tests/BowlingTest.php</file>
+            <file>Logger/tests/LoggerTest.php</file>
+            <file>Logger/tests/DBAdapterTest.php</file>
+            <file>Logger/tests/FileAdapterTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
