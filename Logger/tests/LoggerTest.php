@@ -21,12 +21,19 @@ final class LoggerTest extends TestCase
 
     public function setUp(): void
     {
-        unlink($this->filePath);
-        unlink($this->dbPath);
-
         $this->loggerDummy = new Logger(new DummyAdapter());
         $this->loggerFile = new Logger(new FileAdapter($this->filePath));
         $this->loggerDb = new Logger(new DBAdapter($this->dbPath));
+
+        if(file_exists($this->filePath))
+        {
+            unlink($this->filePath);
+        }
+
+        if(file_exists($this->dbPath))
+        {
+            unlink($this->dbPath);
+        }
     }
 
     /**
@@ -109,6 +116,11 @@ final class LoggerTest extends TestCase
         $this->loggerFile->log("");
         $this->loggerFile->log("bravo");
         $this->assertEquals(3,count($this->loggerFile->get()));
+        if(file_exists($this->filePath))
+        {
+            unlink($this->filePath);
+        }
+
     }
 
     /**
@@ -123,6 +135,10 @@ final class LoggerTest extends TestCase
         $this->loggerDb->log("");
         $this->loggerDb->log("bravo");
         $this->assertEquals(3,count($this->loggerDb->get()));
+        if(file_exists($this->dbPath))
+        {
+            unlink($this->dbPath);
+        }
     }
 
     
