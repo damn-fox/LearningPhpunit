@@ -21,7 +21,7 @@
          <testsuite name="bowling">
             <directory>Bowling/tests</directory>
         </testsuite>
-        <testsuite name="money">
+        <testsuite name="logger">
             <directory>Logger/tests</directory>
         </testsuite>
          <testsuite name="allTests">
@@ -30,6 +30,8 @@
             <file>Basket/tests/BasketTest.php</file>
             <file>Bowling/tests/BowlingTest.php</file>
             <file>Logger/tests/LoggerTest.php</file>
+            <file>Logger/tests/DBAdapterTest.php</file>
+            <file>Logger/tests/FileAdapterTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>

@@ -14,26 +14,10 @@ final class LoggerTest extends TestCase
 {
 
     private $loggerDummy;
-    private $loggerFile;
-    private $loggerDb;
-    private $filePath = '/var/www/html/LearningPhpunit/log.txt';
-    private $dbPath = '/var/www/html/LearningPhpunit/configDB.db';
 
     public function setUp(): void
     {
         $this->loggerDummy = new Logger(new DummyAdapter());
-        $this->loggerFile = new Logger(new FileAdapter($this->filePath));
-        $this->loggerDb = new Logger(new DBAdapter($this->dbPath));
-
-        if(file_exists($this->filePath))
-        {
-            unlink($this->filePath);
-        }
-
-        if(file_exists($this->dbPath))
-        {
-            unlink($this->dbPath);
-        }
     }
 
     /**
@@ -102,46 +86,7 @@ final class LoggerTest extends TestCase
         $this->loggerDummy->log("");
         $this->loggerDummy->log("");
         $this->assertEquals(0,count($this->loggerDummy->get()));
-    }
-
-    /**
-     * @test
-     */
-    public function fileLenght()
-    {
-        $this->loggerFile->log("ciao");
-        $this->loggerFile->log("");
-        $this->loggerFile->log("ciccio");
-        $this->loggerFile->log("");
-        $this->loggerFile->log("");
-        $this->loggerFile->log("bravo");
-        $this->assertEquals(3,count($this->loggerFile->get()));
-        if(file_exists($this->filePath))
-        {
-            unlink($this->filePath);
-        }
-
-    }
-
-    /**
-     * @test
-     */
-    public function DbLenght()
-    {
-        $this->loggerDb->log("ciao");
-        $this->loggerDb->log("");
-        $this->loggerDb->log("ciccio");
-        $this->loggerDb->log("");
-        $this->loggerDb->log("");
-        $this->loggerDb->log("bravo");
-        $this->assertEquals(3,count($this->loggerDb->get()));
-        if(file_exists($this->dbPath))
-        {
-            unlink($this->dbPath);
-        }
-    }
-
-    
+    }    
 }
 
 
