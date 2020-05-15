@@ -40,7 +40,6 @@
             <file>Bowling/tests/BowlingTest.php</file>
             <file>Logger/tests/LoggerTest.php</file>
             <file>Logger/tests/DBAdapterTest.php</file>
-            <file>Logger/tests/FileAdapterTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
