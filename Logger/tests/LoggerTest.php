@@ -1,18 +1,25 @@
-<?php declare(strict_types=1);
+<?php
 
-require "vendor/autoload.php";
+/**
+ * This file is part of `niccolo/learning-test`.
+ * (c) 2016-2020 prooph software GmbH <contact@prooph.de>
+ * (c) 2016-2020 Sascha-Oliver Prolic <saschaprolic@googlemail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
 
 use Acme\DummyAdapter;
-use Acme\FileAdapter;
-use Acme\DBAdapter;
 use Acme\Logger;
 
 use PHPUnit\Framework\TestCase;
 
-
 final class LoggerTest extends TestCase
 {
-
     private $loggerDummy;
 
     public function setUp(): void
@@ -36,13 +43,13 @@ final class LoggerTest extends TestCase
      */
     public function arrayLenght()
     {
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("ciao");
-        $this->assertEquals(3,count($this->loggerDummy->get()));
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('ciao');
+        $this->assertEquals(3, \count($this->loggerDummy->get()));
     }
 
     /**
@@ -50,12 +57,12 @@ final class LoggerTest extends TestCase
      */
     public function arrayHoldsTheValue()
     {
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("Sono una stringa");
-        $this->loggerDummy->log("");
-        $this->assertEquals("Sono una stringa",$this->loggerDummy->get()[2]);
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('Sono una stringa');
+        $this->loggerDummy->log('');
+        $this->assertEquals('Sono una stringa', $this->loggerDummy->get()[2]);
     }
 
     /**
@@ -63,12 +70,12 @@ final class LoggerTest extends TestCase
      */
     public function arrayDoesntHoldsTheValue()
     {
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("ciao");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("Sono una stringa");
-        $this->loggerDummy->log("");
-        $this->assertNotEquals("Sono unastringa",$this->loggerDummy->get()[2]);
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('ciao');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('Sono una stringa');
+        $this->loggerDummy->log('');
+        $this->assertNotEquals('Sono unastringa', $this->loggerDummy->get()[2]);
     }
 
     /**
@@ -76,18 +83,15 @@ final class LoggerTest extends TestCase
      */
     public function enterAllEmptyStrings()
     {
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->loggerDummy->log("");
-        $this->assertEquals(0,count($this->loggerDummy->get()));
-    }    
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->loggerDummy->log('');
+        $this->assertEquals(0, \count($this->loggerDummy->get()));
+    }
 }
-
-
-?>

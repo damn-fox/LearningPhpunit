@@ -11,19 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Acme;
+$config = new Prooph\CS\Config\Prooph();
+$config->getFinder()->in(__DIR__);
+$config->getFinder()->append(['.php_cs']);
 
-class DummyAdapter implements LoggerAdapter
-{
-    private $message = [];
+$cacheDir = \getenv('TRAVIS') ? \getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 
-    public function log(string $userString): void
-    {
-        $this->message[] = $userString;
-    }
+$config->setCacheFile($cacheDir . '/.php_cs.cache');
 
-    public function get(): array
-    {
-        return $this->message;
-    }
-}
+return $config;

@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/damn-fox/https://github.com/damn-fox/LearningPhpunit.png?branch=master)](https://travis-ci.org/damn-fox/https://github.com/damn-fox/LearningPhpunit)

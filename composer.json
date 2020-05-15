@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-       
+        "prooph/php-cs-fixer-config": "^0.3.1"
     },
     "autoload": {
         "psr-4": {
@@ -16,5 +16,12 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"
-    }
+    },
+    "scripts": {
+        "check": [
+          "@cs"
+        ],
+        "cs": "php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix -v --diff"
+      }
 }
