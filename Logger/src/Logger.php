@@ -1,59 +1,27 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Acme;
 
-use \PDO;
-use \PDOException;
-
 final class Logger
 {
-
-    private $text = array();
-    private $method ;
-    private $pathFile = "/var/www/html/LearningPhpunit/log.txt";
-
-    public function __construct()
+    public function __construct(LoggerAdapter $adapter)
     {
-        if (!file_exists($this->pathFile)) {
-            $myfile = fopen($this->pathFile, "w") or die("Unable to open file!");
-            fclose($myfile);
+        $this->adapter = $adapter;
+    }
+
+    public function log(string $userString): void
+    {
+        if ($userString === '') {
+            return;
         }
+
+        $this->adapter->log($userString);
     }
 
-    public function ChooseMethod($method){
-        $this->method= $method;
-    }
-
-    public function Log(string $userString): void
+    public function get(): array
     {
-        if( $userString !== '')
-        {
-            $this->text[] = $userString;
-            if($this->method =="file")
-            {
-                $current = file_get_contents($this->pathFile);
-                $current .= "$userString\n";
-                file_put_contents($this->pathFile, $current);
-            }
-
-            if($this->method =="database")
-            {
-                $user = "damnfox";
-                $pass = "damnfox300992";
-                try {
-                    $connection = new PDO('mysql:host=localhost;dbname=logger', $user, $pass);
-                    $sql = "INSERT INTO log (textlog) VALUES (?)";
-                    $connection->prepare($sql)->execute([$userString]);
-                } catch (PDOException $e) {
-                    print "Error!: " . $e->getMessage() . "<br/>";
-                    die();
-                }
-            }
-        }
+        return $this->adapter->get();
     }
-
-    public function GetValue() : array
-    {
-        return $this->text;
-    }
-}
+} // end class logger 
