@@ -31,6 +31,16 @@ final class WardrobeTest extends TestCase
      */
     public function countSolutions()
     {
-        $this->assertEquals(16, \count($this->ward->get()));
+        $this->ward->configureWardrobe();
+        $this->assertEquals(17, \count($this->ward->get()));
+    }
+
+    /**
+     * @test
+     */
+    public function minPrice()
+    {
+        $this->ward->configureWardrobe();
+        $this->assertEquals(214, $this->ward->minPrice());
     }
 }

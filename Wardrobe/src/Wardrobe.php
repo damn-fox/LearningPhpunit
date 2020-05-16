@@ -16,27 +16,42 @@ namespace Acme;
 final class Wardrobe
 {
     private $result = [];
+    private $minPrice = [];
 
-    public function __construct()
+    public function configureWardrobe()
     {
-        $sizes = [50, 75, 100, 120];
+        $sizes = [59 => 50, 62 => 75, 90 => 100, 111 => 120];
         foreach ($sizes as $i) {
             foreach ($sizes as $j) {
-                if (($i + $j) === 250) {
-                    $this->result[] = "$i+$j";
-                }
                 foreach ($sizes as $l) {
                     if (($i + $j + $l) === 250) {
-                        $this->result[] = "$i+$j+$l";
+                        $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes);
+                        \array_push($this->result, ['misura' => "$i,$j,$l", 'prezzo' => $price]);
                     }
                     foreach ($sizes as $k) {
                         if (($i + $j + $l + $k) === 250) {
-                            $this->result[] = "$i+$j+$l+$k";
+                            $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes) + \array_search($k, $sizes);
+                            \array_push($this->result, ['misura' => "$i,$j,$l,$k", 'prezzo' => $price]);
+                        }
+                        foreach ($sizes as $m) {
+                            if (($i + $j + $l + $k + $m) === 250) {
+                                $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes) + \array_search($k, $sizes) + \array_search($m, $sizes);
+                                \array_push($this->result, ['misura' => "$i,$j,$l,$k,$m", 'prezzo' => $price]);
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    public function getMinPrice()
+    {
+        foreach ($this->result as $singleArray) {
+            $this->minPrice[] = $singleArray['prezzo'];
+        }
+
+        return \min($this->minPrice);
     }
 
     public function get()
