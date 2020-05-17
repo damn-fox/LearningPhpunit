@@ -44,7 +44,7 @@ final class Lift
 
     public function removePassenger(Person $person)
     {
-        $position = array_search($person, $this->passengers, true);
+        $position = \array_search($person, $this->passengers, true);
 
         unset($this->passengers[$position]);
 
