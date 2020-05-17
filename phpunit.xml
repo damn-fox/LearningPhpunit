@@ -33,6 +33,9 @@
         <testsuite name="wardrobe">
             <directory>Wardrobe/tests</directory>
         </testsuite>
+        <testsuite name="lift">
+            <directory>Lift/tests</directory>
+        </testsuite>
          <testsuite name="allTests">
             <file>Money/tests/MoneyTest.php</file>
             <file>Kata/tests/KataConvertTest.php</file>
@@ -40,6 +43,7 @@
             <file>Bowling/tests/BowlingTest.php</file>
             <file>Logger/tests/LoggerTest.php</file>
             <file>Logger/tests/DBAdapterTest.php</file>
+            <file>Lift/tests/LiftTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
