@@ -42,6 +42,15 @@ final class Lift
         $this->passengers[] = $person;
     }
 
+    public function removePassenger(Person $person)
+    {
+        $position = array_search($person, $this->passengers, true);
+
+        unset($this->passengers[$position]);
+
+        $person->setCurrentFloor($this->getCurrentFloor());
+    }
+
     public function getPassengers(): array
     {
         return $this->passengers;

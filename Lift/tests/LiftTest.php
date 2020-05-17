@@ -28,11 +28,15 @@ final class LiftTest extends TestCase
 
     public function testNumberOfPassengersInLiftIsCorrect()
     {
-        $passenger1 = new Person('Test', 0, 0);
-        $passenger2 = new Person('Test', 0, 0);
+        $passenger1 = new Person('Test', 0, 6);
+        $passenger2 = new Person('Test', 0, 4);
+        $passenger3 = new Person('Test', 0, 2);
 
         $this->lift->addPassenger($passenger1);
         $this->lift->addPassenger($passenger2);
+        $this->lift->addPassenger($passenger3);
+
+        $this->lift->removePassenger($passenger3);
 
         $this->assertEquals(2, $this->lift->getNumberOfPassengers());
     }
