@@ -15,29 +15,30 @@ namespace Acme;
 
 final class Wardrobe
 {
-    private $result = [];
+    private $allCombinations = [];
+    private $filteredCombinations = [];
     private $minPrice = [];
+    private $sizes = [];
+    private $sum = 0;
 
-    public function configureWardrobe()
+    public function __construct(array $sizes, int $sum)
     {
-        $sizes = [59 => 50, 62 => 75, 90 => 100, 111 => 120];
-        foreach ($sizes as $i) {
-            foreach ($sizes as $j) {
-                foreach ($sizes as $l) {
-                    if (($i + $j + $l) === 250) {
-                        $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes);
-                        \array_push($this->result, ['misura' => "$i,$j,$l", 'prezzo' => $price]);
-                    }
-                    foreach ($sizes as $k) {
-                        if (($i + $j + $l + $k) === 250) {
-                            $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes) + \array_search($k, $sizes);
-                            \array_push($this->result, ['misura' => "$i,$j,$l,$k", 'prezzo' => $price]);
-                        }
-                        foreach ($sizes as $m) {
-                            if (($i + $j + $l + $k + $m) === 250) {
-                                $price = \array_search($i, $sizes) + \array_search($j, $sizes) + \array_search($l, $sizes) + \array_search($k, $sizes) + \array_search($m, $sizes);
-                                \array_push($this->result, ['misura' => "$i,$j,$l,$k,$m", 'prezzo' => $price]);
-                            }
+        $this->sizes = $sizes;
+        $this->sum = $sum;
+
+        $this->calculateAllCombinations();
+    }
+
+    public function calculateAllCombinations()
+    {
+        foreach ($this->sizes as $i) {
+            foreach ($this->sizes as $j) {
+                foreach ($this->sizes as $l) {
+                    $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l]);
+                    foreach ($this->sizes as $k) {
+                        $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l, $k]);
+                        foreach ($this->sizes as $m) {
+                            $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l, $k, $m]);
                         }
                     }
                 }
@@ -45,17 +46,39 @@ final class Wardrobe
         }
     }
 
+    public function add(array $array, $item): array
+    {
+        $array[] = $item;
+
+        return $array;
+    }
+
     public function getMinPrice()
     {
         foreach ($this->result as $singleArray) {
-            $this->minPrice[] = $singleArray['prezzo'];
+            $this->minPrice[] = $singleArray;
         }
 
         return \min($this->minPrice);
     }
 
-    public function get()
+    public function getAllCombinations()
     {
-        return $this->result;
+        return $this->allCombinations;
+    }
+
+    public function getFilteredCombinations()
+    {
+        foreach ($this->allCombinations as $item) {
+            if (\array_sum($item) === $this->sum) {
+                $this->filteredCombinations[] = $item;
+            }
+        }
+
+        return $this->filteredCombinations;
     }
 } // end class logger
+
+//$ward = new Wardrobe([50,75,100,120],250);
+//print_r($ward->getAllCombinations());
+//print_r($ward->getFilteredCombinations());
