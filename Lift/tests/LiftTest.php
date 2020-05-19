@@ -21,7 +21,10 @@ final class LiftTest extends TestCase
         $this->lift = new Lift();
     }
 
-    public function testNumberOfPassengersInLiftIsCorrect()
+    /**
+     * @test
+     */
+    public function numberOfPassengersInLiftIsCorrect()
     {
         $passenger1 = new Person('Test', 0, 6);
         $passenger2 = new Person('Test', 0, 4);
