@@ -29,11 +29,11 @@ final class Wardrobe
         foreach ($this->sizes as $i) {
             foreach ($this->sizes as $j) {
                 foreach ($this->sizes as $l) {
-                    $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l]);
+                    $this->add([$i, $j, $l]);
                     foreach ($this->sizes as $k) {
-                        $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l, $k]);
+                        $this->add([$i, $j, $l, $k]);
                         foreach ($this->sizes as $m) {
-                            $this->allCombinations = $this->add($this->allCombinations, [$i, $j, $l, $k, $m]);
+                           $this->add([$i, $j, $l, $k, $m]);
                         }
                     }
                 }
@@ -41,11 +41,10 @@ final class Wardrobe
         }
     }
 
-    public function add(array $array, $item): array
+    public function add($item):array
     {
-        $array[] = $item;
-
-        return $array;
+        $this->allCombinations[]= $item;
+        return $this->allCombinations;
     }
 
     public function getMinPrice()

@@ -32,9 +32,10 @@ final class WardrobeTest extends TestCase
      */
     public function addItem()
     {
-        $array = ['banana', 'ananas', 'pera'];
-        $array = $this->ward->add($array, 'arancia');
-        $this->assertEquals('arancia', $array[3]);
+        $array = [50,200];
+        $this->ward->add($array);
+
+        $this->assertEquals($array, $this->ward->getFilteredCombinations()[17]);
     }
 
     /**
