@@ -33,7 +33,7 @@ final class Wardrobe
                     foreach ($this->sizes as $k) {
                         $this->add([$i, $j, $l, $k]);
                         foreach ($this->sizes as $m) {
-                           $this->add([$i, $j, $l, $k, $m]);
+                            $this->add([$i, $j, $l, $k, $m]);
                         }
                     }
                 }
@@ -41,9 +41,10 @@ final class Wardrobe
         }
     }
 
-    public function add($item):array
+    public function add($item): array
     {
-        $this->allCombinations[]= $item;
+        $this->allCombinations[] = $item;
+
         return $this->allCombinations;
     }
 
