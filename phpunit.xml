@@ -9,33 +9,6 @@
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true">
     <testsuites>
-        <testsuite name="money">
-            <directory>Money/tests</directory>
-        </testsuite>
-        <testsuite name="converter">
-           <directory>Kata/tests</directory>
-        </testsuite>
-        <testsuite name="basket">
-            <directory>Basket/tests</directory>
-        </testsuite>
-         <testsuite name="bowling">
-            <directory>Bowling/tests</directory>
-        </testsuite>
-        <testsuite name="logger">
-            <directory>Logger/tests</directory>
-        </testsuite>
-         <testsuite name="DBlogger">
-            <directory>Logger/tests</directory>
-        </testsuite>
-         <testsuite name="filelogger">
-            <directory>Logger/tests</directory>
-        </testsuite>
-        <testsuite name="wardrobe">
-            <directory>Wardrobe/tests</directory>
-        </testsuite>
-        <testsuite name="lift">
-            <directory>Lift/tests</directory>
-        </testsuite>
          <testsuite name="allTests">
             <file>Money/tests/MoneyTest.php</file>
             <file>Kata/tests/KataConvertTest.php</file>
