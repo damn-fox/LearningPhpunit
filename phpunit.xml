@@ -17,6 +17,7 @@
             <file>Logger/tests/LoggerTest.php</file>
             <file>Logger/tests/DBAdapterTest.php</file>
             <file>Wardrobe/tests/WardrobeTest.php</file>
+            <file>Wardrobe/tests/CombinationTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>

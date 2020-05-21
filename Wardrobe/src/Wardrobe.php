@@ -10,30 +10,30 @@ namespace Acme;
 
 final class Wardrobe
 {
-    private $allCombinations = [];
     private $filteredCombinations = [];
     private $minPrice = [];
     private $sizes = [];
     private $sum = 0;
+    private $combinations;
 
     public function __construct(array $sizes, int $sum)
     {
+        $this->combinations = new Combination();
         $this->sizes = $sizes;
         $this->sum = $sum;
-
         $this->calculateAllCombinations();
     }
 
-    public function calculateAllCombinations()
+    public function calculateAllCombinations(): void
     {
         foreach ($this->sizes as $i) {
             foreach ($this->sizes as $j) {
                 foreach ($this->sizes as $l) {
-                    $this->add([$i, $j, $l]);
+                    $this->combinations->add([$i, $j, $l]);
                     foreach ($this->sizes as $k) {
-                        $this->add([$i, $j, $l, $k]);
+                        $this->combinations->add([$i, $j, $l, $k]);
                         foreach ($this->sizes as $m) {
-                            $this->add([$i, $j, $l, $k, $m]);
+                            $this->combinations->add([$i, $j, $l, $k, $m]);
                         }
                     }
                 }
@@ -41,30 +41,14 @@ final class Wardrobe
         }
     }
 
-    public function add($item): array
+    public function getAllCombinations(): array
     {
-        $this->allCombinations[] = $item;
-
-        return $this->allCombinations;
+        return $this->combinations->get();
     }
 
-    public function getMinPrice()
+    public function getFilteredCombinations(): array
     {
-        foreach ($this->result as $singleArray) {
-            $this->minPrice[] = $singleArray;
-        }
-
-        return \min($this->minPrice);
-    }
-
-    public function getAllCombinations()
-    {
-        return $this->allCombinations;
-    }
-
-    public function getFilteredCombinations()
-    {
-        foreach ($this->allCombinations as $item) {
+        foreach ($this->getAllCombinations() as $item) {
             if (\array_sum($item) === $this->sum) {
                 $this->filteredCombinations[] = $item;
             }
@@ -73,7 +57,6 @@ final class Wardrobe
         return $this->filteredCombinations;
     }
 } // end class logger
-
+//echo 'ciao';
 //$ward = new Wardrobe([50,75,100,120],250);
 //print_r($ward->getAllCombinations());
-//print_r($ward->getFilteredCombinations());

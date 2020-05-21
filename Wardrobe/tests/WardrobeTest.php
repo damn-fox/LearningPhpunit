@@ -30,17 +30,6 @@ final class WardrobeTest extends TestCase
     /**
      * @test
      */
-    public function addItem()
-    {
-        $array = [50, 200];
-        $this->ward->add($array);
-
-        $this->assertEquals($array, $this->ward->getFilteredCombinations()[17]);
-    }
-
-    /**
-     * @test
-     */
     public function countFilteredItem()
     {
         $this->assertEquals(17, \count($this->ward->getFilteredCombinations()));
