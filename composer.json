@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\": ["Basket/src/","Money/src/","Kata/src/","Bowling/src/","Logger/src/","Wardrobe/src/"]
+            "Acme\\": ["Basket/src/","Money/src/","Kata/src/","Bowling/src/","Logger/src/","Wardrobe/src/","Lift/src/"]
         }
     },
     "require-dev": {

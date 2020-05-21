@@ -16,6 +16,7 @@
             <file>Bowling/tests/BowlingTest.php</file>
             <file>Logger/tests/LoggerTest.php</file>
             <file>Logger/tests/DBAdapterTest.php</file>
+            <file>Lift/tests/LiftTest.php</file>
             <file>Wardrobe/tests/WardrobeTest.php</file>
             <file>Wardrobe/tests/CombinationTest.php</file>
         </testsuite>
