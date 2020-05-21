@@ -6,8 +6,6 @@
 
 declare(strict_types=1);
 
-require 'vendor/autoload.php';
-
 use Acme\Basket;
 
 use PHPUnit\Framework\TestCase;
