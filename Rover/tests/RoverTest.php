@@ -20,4 +20,12 @@ final class RoverTest extends TestCase
     {
         $this->rover = new Rover();
     }
+
+    public function testCreateValidInstance(): void
+    {
+        $this->assertInstanceOf(
+            Rover::class,
+            new Rover()
+        );
+    }
 }

@@ -10,14 +10,34 @@ namespace Acme;
 
 final class Destination
 {
+    private $allOrientations = ['n', 's', 'e', 'w'];
+    private $allDirections = ['f', 'b', 'r', 'l'];
     private $orientation;
     private $direction;
-    private $xDestination;
-    private $yDestination;
+
+    /*
+    private $north = "n";
+    private $south = "s";
+    private $east = "e";
+    private $west = "w";
+    private $forward = "f";
+    private $backward = "b";
+    private $right = "r";
+    private $left = "l";
+    */
 
     public function __construct(string $orientation, string $direction)
     {
+        if (! \in_array($orientation, $this->allOrientations)) {
+            throw new \InvalidArgumentException(\sprintf('"%s" is not a valid orientation.', $orientation));
+        }
+
         $this->orientation = $orientation;
+
+        if (! \in_array($direction, $this->allDirections)) {
+            throw new \InvalidArgumentException(\sprintf('"%s" is not a valid direction.', $direction));
+        }
+
         $this->direction = $direction;
     }
 
@@ -29,15 +49,5 @@ final class Destination
     public function getDirection(): string
     {
         return $this->direction;
-    }
-
-    public function getX(): int
-    {
-        return $this->xDestination;
-    }
-
-    public function getY(): int
-    {
-        return $this->yDestination;
     }
 } // end class Rover
