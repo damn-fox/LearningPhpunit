@@ -15,28 +15,28 @@ final class Destination
     private $xDestination;
     private $yDestination;
 
-    public function __construct(string $orientation,string $direction)
+    public function __construct(string $orientation, string $direction)
     {
         $this->orientation = $orientation;
         $this->direction = $direction;
     }
 
-    public function getOrientation():string
+    public function getOrientation(): string
     {
         return $this->orientation;
     }
 
-    public function getDirection():string
+    public function getDirection(): string
     {
         return $this->direction;
     }
 
-    public function getX():int
+    public function getX(): int
     {
         return $this->xDestination;
     }
 
-    public function getY():int
+    public function getY(): int
     {
         return $this->yDestination;
     }

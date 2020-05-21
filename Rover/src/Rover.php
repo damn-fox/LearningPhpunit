@@ -10,5 +10,4 @@ namespace Acme;
 
 final class Rover
 {
-
 } // end class Rover

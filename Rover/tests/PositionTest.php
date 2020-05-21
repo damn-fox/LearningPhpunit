@@ -19,8 +19,7 @@ final class PositionTest extends TestCase
      */
     public function getPosition()
     {
-        $position = new Position([2,4]);
-        $this->assertEquals([2,4],$position->get());
+        $position = new Position([2, 4]);
+        $this->assertEquals([2, 4], $position->get());
     }
-
 }

@@ -14,15 +14,13 @@ use PHPUnit\Framework\TestCase;
 
 final class DestinationTest extends TestCase
 {
-
     /**
      * @test
      */
     public function getDestination()
     {
-        $destination = new Destination("n","f");
-        $this->assertEquals("n",$destination->getOrientation());
-        $this->assertEquals("f",$destination->getDirection());
+        $destination = new Destination('n', 'f');
+        $this->assertEquals('n', $destination->getOrientation());
+        $this->assertEquals('f', $destination->getDirection());
     }
-
 }

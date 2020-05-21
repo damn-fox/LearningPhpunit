@@ -9,8 +9,6 @@ declare(strict_types=1);
 require 'vendor/autoload.php';
 
 use Acme\Rover;
-use Acme\Position;
-use Acme\Destination;
 
 use PHPUnit\Framework\TestCase;
 
@@ -22,5 +20,4 @@ final class RoverTest extends TestCase
     {
         $this->rover = new Rover();
     }
-
 }
