@@ -48,7 +48,7 @@ final class Wardrobe
 
     public function getFilteredCombinations(): array
     {
-        foreach ($this->getAllCombinations() as $item) {
+        foreach ($this->combinations->get() as $item) {
             if (\array_sum($item) === $this->sum) {
                 $this->filteredCombinations[] = $item;
             }
