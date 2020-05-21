@@ -6,8 +6,6 @@
 
 declare(strict_types=1);
 
-require 'vendor/autoload.php';
-
 use Acme\Wardrobe;
 
 use PHPUnit\Framework\TestCase;
@@ -18,24 +16,22 @@ final class WardrobeTest extends TestCase
 
     public function setUp(): void
     {
-        $this->ward = new Wardrobe();
+        $this->ward = new Wardrobe([50, 75, 100, 120], 250);
     }
 
     /**
      * @test
      */
-    public function countSolutions()
+    public function countItem()
     {
-        $this->ward->configureWardrobe();
-        $this->assertEquals(17, \count($this->ward->get()));
+        $this->assertEquals(1344, \count($this->ward->getAllCombinations()));
     }
 
     /**
      * @test
      */
-    public function minPrice()
+    public function countFilteredItem()
     {
-        $this->ward->configureWardrobe();
-        $this->assertEquals(214, $this->ward->minPrice());
+        $this->assertEquals(17, \count($this->ward->getFilteredCombinations()));
     }
 }
