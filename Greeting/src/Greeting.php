@@ -48,7 +48,7 @@ final class Greeting
         return $greet;
     }
 
-    public function greedMixed(array $names): string
+    public function greetMixed(array $names): string
     {
         $upperNames = [];
         if (\count($names) < 3) {
@@ -82,7 +82,7 @@ final class Greeting
         return $finalGreed;
     }
 
-    public function greedNamesContainingComma(array $names): string
+    public function greetNamesContainingComma(array $names): string
     {
         if (\count($names) < 2) {
             throw new \InvalidArgumentException(\sprintf('Array must consist of three or more names!'));
@@ -94,5 +94,19 @@ final class Greeting
         $name3 = \explode(',', $names[1])[1];
 
         return "Hello, {$names[0]}, {$name2}, and {$name3}";
+    }
+
+    public function greetEscapingIntentionalCommas(array $names): string
+    {
+        if (\count($names) < 2) {
+            throw new \InvalidArgumentException(\sprintf('Array must consist of three names!'));
+        }
+        if (\explode(',', $names[1]) === false) {
+            throw new \InvalidArgumentException(\sprintf('Names separated by commas must be the second element of the array!'));
+        }
+        (preg_match('/"([^"]+)"/', $names[1], $name));
+        $name2 = explode(',',$name[1])[0];
+        $name3 = explode(',',$name[1])[1];
+        return "Hello, {$names[0]} and $name2,$name3.";
     }
 }// end of class

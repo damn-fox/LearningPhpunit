@@ -85,36 +85,36 @@ final class GreetingTest extends TestCase
     public function should_return_a_mixed_greet_for_normal_and_shouted_names()
     {
         $greet = new Greeting();
-        $this->assertEquals('Hello, Amy and Charlotte. AND HELLO BRIAN!', $greet->greedMixed(['Amy', 'BRIAN', 'Charlotte']));
+        $this->assertEquals('Hello, Amy and Charlotte. AND HELLO BRIAN!', $greet->greetMixed(['Amy', 'BRIAN', 'Charlotte']));
     }
 
     /**
      * @test
      */
-    public function should_return_an_exception_given_an_array_with_less_than_three_names_in_mixed_greed()
+    public function should_return_an_exception_given_an_array_with_less_than_three_names_in_mixed_greet()
     {
         $greet = new Greeting();
         $this->expectException(\InvalidArgumentException::class);
-        $greet->greedMixed(['Amy', 'BRIAN']);
+        $greet->greetMixed(['Amy', 'BRIAN']);
     }
 
     /**
      * @test
      */
-    public function should_return_an_exception_given_an_array_with_two_or_more_upper_names_in_mixed_greed()
+    public function should_return_an_exception_given_an_array_with_two_or_more_upper_names_in_mixed_greet()
     {
         $greet = new Greeting();
         $this->expectException(\InvalidArgumentException::class);
-        $greet->greedMixed(['Amy', 'BRIAN', 'CICCIO']);
+        $greet->greetMixed(['Amy', 'BRIAN', 'CICCIO']);
     }
 
     /**
      * @test
      */
-    public function should_return_a_greed_whit_split_names()
+    public function should_return_a_greet_whit_split_names()
     {
         $greet = new Greeting();
-        $this->assertEquals('Hello, Marco, Rico, and Charlotte', $greet->greedNamesContainingComma(['Marco', 'Rico,Charlotte']));
+        $this->assertEquals('Hello, Marco, Rico, and Charlotte', $greet->greetNamesContainingComma(['Marco', 'Rico,Charlotte']));
     }
 
     /**
@@ -124,6 +124,15 @@ final class GreetingTest extends TestCase
     {
         $greet = new Greeting();
         $this->expectException(\InvalidArgumentException::class);
-        $greet->greedMixed(['Amy,Brian', 'Ciccio']);
+        $greet->greetMixed(['Amy,Brian', 'Ciccio']);
+    }
+
+    /**
+     * @test
+     */
+    public function should_return_a_greet_escaping_intentional_commas()
+    {
+        $greet = new Greeting();
+        $this->assertEquals('Hello, Bob and Charlie, Dianne.', $greet->greetEscapingIntentionalCommas(['Bob', '"Charlie, Dianne"']));
     }
 }
