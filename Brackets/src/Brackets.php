@@ -12,7 +12,7 @@ final class Brackets
 {
     private $userString;
 
-    public function __construct(string $userString)
+    public function __construct(string $userString = '')
     {
         $this->userString = \str_split($userString);
     }
