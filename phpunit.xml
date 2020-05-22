@@ -22,6 +22,7 @@
             <file>Rover/tests/RoverTest.php</file>
             <file>Rover/tests/DestinationTest.php</file>
             <file>Rover/tests/PositionTest.php</file>
+            <file>Brackets/tests/BracketsTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
