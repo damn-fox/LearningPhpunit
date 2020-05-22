@@ -104,9 +104,10 @@ final class Greeting
         if (\explode(',', $names[1]) === false) {
             throw new \InvalidArgumentException(\sprintf('Names separated by commas must be the second element of the array!'));
         }
-        (preg_match('/"([^"]+)"/', $names[1], $name));
-        $name2 = explode(',',$name[1])[0];
-        $name3 = explode(',',$name[1])[1];
+        (\preg_match('/"([^"]+)"/', $names[1], $name));
+        $name2 = \explode(',', $name[1])[0];
+        $name3 = \explode(',', $name[1])[1];
+
         return "Hello, {$names[0]} and $name2,$name3.";
     }
 }// end of class
