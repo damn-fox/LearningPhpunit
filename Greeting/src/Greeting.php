@@ -10,6 +10,34 @@ namespace Acme;
 
 final class Greeting
 {
+    public function greeting($userTyping)
+    {
+        if (\is_string($userTyping)) {
+            return $this->greet($userTyping);
+        }
+
+        if (\is_array($userTyping)) {
+            if (\count($userTyping) > 2) {
+                if ($userTyping[0] === \strtoupper($userTyping[0]) || $userTyping[1] === \strtoupper($userTyping[1])) {
+                    return $this->greetMixed($userTyping);
+                }
+
+                return $this->greetAll($userTyping);
+            }
+            if (\count($userTyping) === 2) {
+                if (\strpos($userTyping[1], '"') !== false || \strpos($userTyping[1], ',') !== false) {
+                    if (\strpos(\explode(',', $userTyping[1])[0], '"') !== false) {
+                        return $this->greetEscapingIntentionalCommas($userTyping);
+                    }
+
+                    return $this->greetNamesContainingComma($userTyping);
+                }
+
+                return $this->greetMany($userTyping);
+            }
+        }
+    }
+
     public function greet(string $name): string
     {
         if ($name === '') {
@@ -24,18 +52,11 @@ final class Greeting
 
     public function greetMany(array $names): string
     {
-        if (\count($names) !== 2) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of two names!'));
-        }
-
         return "Hello, {$names[0]} and {$names[1]}";
     }
 
     public function greetAll(array $names): string
     {
-        if (\count($names) <= 2) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of three or more names!'));
-        }
         $greet = 'Hello';
         for ($i = 0; $i < \count($names); $i++) {
             if ($i === \count($names) - 1) {
@@ -51,17 +72,13 @@ final class Greeting
     public function greetMixed(array $names): string
     {
         $upperNames = [];
-        if (\count($names) < 3) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of three or more names!'));
-        }
+
         for ($i = 0; $i < \count($names); $i++) {
             if ($names[$i] === \strtoupper($names[$i])) {
                 $upperNames[] = $names[$i];
             }
         }
-        if (\count($upperNames) > 1) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of one upper name!'));
-        }
+
         //“Hello, Amy and Charlotte. ANDHELLO BRIAN!”
         $normalGreed = 'Hello';
         $shoudedGreed = 'AND HELLO ';
@@ -84,12 +101,6 @@ final class Greeting
 
     public function greetNamesContainingComma(array $names): string
     {
-        if (\count($names) < 2) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of three or more names!'));
-        }
-        if (\explode(',', $names[1]) === false) {
-            throw new \InvalidArgumentException(\sprintf('Names separated by commas must be the second element of the array!'));
-        }
         $name2 = \explode(',', $names[1])[0];
         $name3 = \explode(',', $names[1])[1];
 
@@ -98,12 +109,6 @@ final class Greeting
 
     public function greetEscapingIntentionalCommas(array $names): string
     {
-        if (\count($names) < 2) {
-            throw new \InvalidArgumentException(\sprintf('Array must consist of three names!'));
-        }
-        if (\explode(',', $names[1]) === false) {
-            throw new \InvalidArgumentException(\sprintf('Names separated by commas must be the second element of the array!'));
-        }
         (\preg_match('/"([^"]+)"/', $names[1], $name));
         $name2 = \explode(',', $name[1])[0];
         $name3 = \explode(',', $name[1])[1];
