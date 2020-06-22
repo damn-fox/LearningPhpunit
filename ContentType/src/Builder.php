@@ -15,10 +15,10 @@ class Builder
     public $field;
     public $fields = [];
 
-
     public function identifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
@@ -26,21 +26,21 @@ class Builder
     {
         $this->contentType = [
             'mainLanguageCode' => 'ita-IT',
-            'remoteId' => sha1($names.time()),
+            'remoteId' => \sha1($names.\time()),
             'urlAliasSchema' => '',
             'nameSchema' => $nameSchema,
             'names' => ['ita-IT' => $names],
             'descriptions' => ['ita-IT' => $descriptions],
             'group' => 'Content',
-            'isContainer' => true
+            'isContainer' => true,
         ];
+
         return $this;
     }
 
-
     public function field($title, $identifier, $type, $names, $descriptions, $position, $isTranslatable, $isRequired, $isInfoCollector, $validator, $isSearchable)
     {
-        $this->field = array(
+        $this->field = [
             $title => [
                 'identifier' => $identifier,
                 'type' => $type,
@@ -54,17 +54,14 @@ class Builder
                 'validatorConfiguration' => $validator,
             'fieldSettings' => [],
             'isSearchable' => $isSearchable,
-        ]);
-        array_push($this->fields, $this->field) ;
+        ], ];
+        \array_push($this->fields, $this->field);
+
         return $this;
     }
 
-
     public function build()
     {
-        return new ContentType($this->identifier,$this->contentType,$this->fields);
+        return new ContentType($this->identifier, $this->contentType, $this->fields);
     }
-
-
-
 }

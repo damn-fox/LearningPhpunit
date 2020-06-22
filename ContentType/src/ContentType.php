@@ -14,8 +14,7 @@ class ContentType
     private $contentType;
     private $fields;
 
-
-    public function __construct($identifier,$contentType, $fields)
+    public function __construct($identifier, $contentType, $fields)
     {
         $this->identifier = $identifier;
         $this->contentType = $contentType;
@@ -37,12 +36,11 @@ class ContentType
         return $this->fields;
     }
 
-    public function getResult ()
+    public function getResult()
     {
-        return ['identifier'=> $this->identifier,
-                'contentType'=> $this->contentType,
-                'fields'=> $this->fields
+        return ['identifier' => $this->identifier,
+                'contentType' => $this->contentType,
+                'fields' => $this->fields,
                 ];
     }
-
 }

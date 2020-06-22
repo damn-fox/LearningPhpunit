@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 final class ContentTypeTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -29,17 +28,17 @@ final class ContentTypeTest extends TestCase
      */
     public function CreateValidContentTypeInstance(): void
     {
-        $array =[
+        $array = [
             'identifier' => 'webinar',
            'contentType' => [
         'mainLanguageCode' => 'ita-IT',
-        'remoteId' => sha1('Webinar'.time()),
+        'remoteId' => \sha1('Webinar'.\time()),
         'urlAliasSchema' => '',
         'nameSchema' => '<titolo>',
         'names' => ['ita-IT' => 'Webinar'],
         'descriptions' => ['ita-IT' => 'Webinar'],
         'group' => 'Content',
-        'isContainer' => true
+        'isContainer' => true,
     ],
            'fields' => [
         'titolo' => [
@@ -64,7 +63,7 @@ final class ContentTypeTest extends TestCase
             'intro' => [
                 'identifier' => 'intro',
                 'type' => 'ezxmltext',
-                'names' =>  ['ita-IT' => 'Introduzione'],
+                'names' => ['ita-IT' => 'Introduzione'],
                 'descriptions' => ['ita-IT' => 'Introduzione, viene mostrato nella lista dei webinar'],
                 'fieldGroup' => '',
                 'position' => 2,
@@ -74,8 +73,8 @@ final class ContentTypeTest extends TestCase
                 'validatorConfiguration' => [],
                 'fieldSettings' => [],
                 'isSearchable' => true,
-            ]
-    ]];
+            ],
+    ], ];
 
         $validator = [
             'StringLengthValidator' => [
@@ -84,18 +83,15 @@ final class ContentTypeTest extends TestCase
             ],
             ];
 
-        $validator2 =[];
+        $validator2 = [];
 
         $builder = new Builder();
         $builder->identifier('webinar')
-                ->contentType('<titolo>','Webinar','Webinar')
-                ->field('titolo','titolo','ezstring','Titolo','Titolo del webinar',1,true,true,false, $validator,true)
-                ->field('intro','intro','ezxmltext','Introduzione','Introduzione, viene mostrato nella lista dei webinar', 2,true,false,false,$validator2,true);
+                ->contentType('<titolo>', 'Webinar', 'Webinar')
+                ->field('titolo', 'titolo', 'ezstring', 'Titolo', 'Titolo del webinar', 1, true, true, false, $validator, true)
+                ->field('intro', 'intro', 'ezxmltext', 'Introduzione', 'Introduzione, viene mostrato nella lista dei webinar', 2, true, false, false, $validator2, true);
         $type = $builder->build();
-        print_r( $type->getResult());
+        \print_r($type->getResult());
         $this->assertEquals($array, $type->getResult());
-
     }
-
 }
-
