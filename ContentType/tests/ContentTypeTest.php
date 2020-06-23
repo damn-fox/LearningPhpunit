@@ -50,7 +50,7 @@ final class ContentTypeTest extends TestCase
             'position' => 1,
             'isTranslatable' => true,
             'isRequired' => true,
-            'isInfoCollector' => false,
+            'isInfoCollector' => true,
             'validatorConfiguration' => [
                 'StringLengthValidator' => [
                     'minStringLength' => 0,
@@ -68,8 +68,8 @@ final class ContentTypeTest extends TestCase
                 'fieldGroup' => '',
                 'position' => 2,
                 'isTranslatable' => true,
-                'isRequired' => false,
-                'isInfoCollector' => false,
+                'isRequired' => true,
+                'isInfoCollector' => true,
                 'validatorConfiguration' => [],
                 'fieldSettings' => [],
                 'isSearchable' => true,
@@ -83,15 +83,13 @@ final class ContentTypeTest extends TestCase
             ],
             ];
 
-        $validator2 = [];
-
         $builder = new Builder();
         $builder->identifier('webinar')
                 ->contentType('<titolo>', 'Webinar', 'Webinar')
-                ->field('titolo', 'titolo', 'ezstring', 'Titolo', 'Titolo del webinar', 1, true, true, false, $validator, true)
-                ->field('intro', 'intro', 'ezxmltext', 'Introduzione', 'Introduzione, viene mostrato nella lista dei webinar', 2, true, false, false, $validator2, true);
+                ->field('titolo', 'titolo', 'ezstring', 'Titolo', 'Titolo del webinar', 1, $validator)
+                ->field('intro', 'intro', 'ezxmltext', 'Introduzione', 'Introduzione, viene mostrato nella lista dei webinar', 2);
         $type = $builder->build();
-        \print_r($type->getResult());
+
         $this->assertEquals($array, $type->getResult());
     }
 }

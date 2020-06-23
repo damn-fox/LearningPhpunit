@@ -36,7 +36,7 @@ class ContentType
         return $this->fields;
     }
 
-    public function getResult()
+    public function getResult(): array
     {
         return ['identifier' => $this->identifier,
                 'contentType' => $this->contentType,

@@ -12,7 +12,6 @@ class Builder
 {
     public $identifier;
     public $contentType;
-    public $field;
     public $fields = [];
 
     public function identifier($identifier)
@@ -38,9 +37,9 @@ class Builder
         return $this;
     }
 
-    public function field($title, $identifier, $type, $names, $descriptions, $position, $isTranslatable, $isRequired, $isInfoCollector, $validator, $isSearchable)
+    public function field($title, $identifier, $type, $names, $descriptions, $position, $validator = [], $isTranslatable = true, $isRequired = true, $isInfoCollector = true, $isSearchable = true)
     {
-        $this->field = [
+        $array = [
             $title => [
                 'identifier' => $identifier,
                 'type' => $type,
@@ -55,7 +54,8 @@ class Builder
             'fieldSettings' => [],
             'isSearchable' => $isSearchable,
         ], ];
-        \array_push($this->fields, $this->field);
+
+        $this->fields[$title] = $array[$title];
 
         return $this;
     }
