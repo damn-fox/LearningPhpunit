@@ -24,6 +24,7 @@
              <file>Rover/tests/PositionTest.php</file>
              <file>Brackets/tests/BracketsTest.php</file>
              <file>ContentType/tests/ContentTypeTest.php</file>
+             <file>Content/tests/ContentTest.php</file>
         </testsuite>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>

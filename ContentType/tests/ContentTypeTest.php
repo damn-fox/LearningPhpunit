@@ -26,7 +26,7 @@ final class ContentTypeTest extends TestCase
     /**
      * @test
      */
-    public function CreateValidContentTypeInstance(): void
+    public function CheckValidContentType(): void
     {
         $array = [
             'identifier' => 'webinar',
